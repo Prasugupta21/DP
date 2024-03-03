@@ -1,0 +1,8 @@
+{
+  "files.associations": {
+    "*.ejs": "html",
+    "*.js": "javascriptreact",
+    "chrono": "cpp",
+    "complex": "cpp"
+  }
+}

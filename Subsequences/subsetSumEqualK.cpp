@@ -46,3 +46,65 @@ bool subsetSumToK(int n, int k, vector<int> &arr)
 }
 
 // tabulation
+bool subsetSumToK(int n, int target, vector<int> &arr)
+{
+    // Write your code here.
+    vector<vector<bool>> dp(n, vector<bool>(target + 1, 0));
+    for (int i = 0; i < n; i++)
+        dp[i][0] = true;
+    dp[0][arr[0]] = true;
+    for (int i = 1; i < n; i++)
+    {
+        for (int k = 1; k <= target; k++)
+        {
+            bool take = false;
+            bool nonTake = dp[i - 1][k];
+            if (k >= arr[i])
+                take = dp[i - 1][k - arr[i]];
+            dp[i][k] = take | nonTake;
+        }
+    }
+    return dp[n - 1][target];
+}
+
+//space
+bool subsetSumToK(int n, int target, vector<int> &arr) {
+    // Write your code here.
+    vector<bool>dp(target+1,0);
+       vector<bool>curr(target+1,0);
+     curr[0]=true;
+    
+dp[0]=true;
+    dp[arr[0]]=true;
+    for(int i=1;i<n;i++){
+    
+        for(int k=1;k<=target;k++){
+            bool take=false;
+            bool nonTake=dp[k];
+             if(k>=arr[i])take=dp[k-arr[i]];
+             curr[k]=take|nonTake;
+        }
+        dp=curr;
+    }
+     return dp[target];
+
+     //space 
+         // Write your code here.
+    vector<bool>dp(target+1,0);
+     
+    
+dp[0]=true;
+    dp[arr[0]]=true;
+    for(int i=1;i<n;i++){
+      vector<bool>curr(target+1,0);
+     curr[0]=true;
+        for(int k=1;k<=target;k++){
+            bool take=false;
+            bool nonTake=dp[k];
+             if(k>=arr[i])take=dp[k-arr[i]];
+             curr[k]=take|nonTake;
+        }
+        dp=curr;
+    }
+     return dp[target];
+}
