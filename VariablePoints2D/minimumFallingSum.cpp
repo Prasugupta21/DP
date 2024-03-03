@@ -1,3 +1,30 @@
+
+//giving TLE 
+
+
+class Solution {
+public:
+int f(int i,int j,vector<vector<int>>&dp,vector<vector<int>>& grid){
+    if(j<0 || j>=grid[0].size())return 1e9;
+    if(i==0)return grid[i][j];
+    if(dp[i][j]!=-1)return dp[i][j];
+    int left=grid[i][j]+f(i-1,j-1,dp,grid);
+    int up=grid[i][j]+f(i-1,j,dp,grid);
+    int right=grid[i][j]+f(i-1,j+1,dp,grid);
+    return dp[i][j]=min(left,min(up,right));
+
+}
+    int minFallingPathSum(vector<vector<int>>& grid) {
+        int m=grid.size(),n=grid[0].size();
+        int ans=1e9;
+        vector<vector<int>>dp(n,vector<int>(n,-1));
+        for(int i=0;i<n;i++){
+           ans=min(ans,f(m-1,i,dp,grid)) ;
+        }
+        return ans;
+    }
+};
+
 class Solution {
 public:
 
